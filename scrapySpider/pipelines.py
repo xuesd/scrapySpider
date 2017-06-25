@@ -42,14 +42,14 @@ class XicidailiSpiderPipeline(object):
         try:
             cur.execute(select_sql, select_values)
             cur.fetchall()
-            print '------rowcount------', cur.rowcount
+            print('------rowcount------'+cur.rowcount)
             if cur.rowcount >= 1 :
                 update_value = (item['ip'], item['port'], item['position'], item['anonymous'], item['type'], item['speed'], item['connect_time'], item['last_check_time'], cur[0][0])
                 cur.execute(update_sql, update_value)
             else:
                 cur.execute(insert_sql, insert_values)
-        except Exception, e:
-            print "插入失败: ", e
+        except Exception(e):
+            print("插入失败: " + e)
             conn.rollback()
         else:
             conn.commit()
